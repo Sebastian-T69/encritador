@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lan="es">
+    <head>
+
+        <meta charset="UTF-8">
+        <!--para hacerlo responci la pagina-->
+        
+        <!--<meta name="viewport" content="width=device-width">-->
+        
+        <title>Encriptador-Desencriptador</title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="styles.css">
+
+    </head>
+    <body>
+      <header>
+          <div class="caja-logo">
+
+              <img src="imagenes/Vector.png" class="logo"><!-- imajen -->
+
+              <nav><!--panel de navegacion-->
+                 
+              </nav>
+          </div>
+      </header>
+
+      <main>
+
+        <section class="principal">
+            <div class="texto-encri">
+                <textarea id="textarea-encri" rows="10" cols="50" required placeholder="Ingrese el texto aqui"></textarea>
+                
+            </div>
+            <p class="texto"><img src="imagenes/no.png"class="imagenes">  Solo letras minúsculas y sin acentos.</p>
+            <div class="boton-encri">
+                
+                <input type="button" id="boton-encriptador" value=" Encriptador"onclick="encriptar()">
+                <input type="button" id="boton-decencriptador" value="Decencriptador" onclick="desencriptar()">
+            </div>
+            
+        </section>
+
+        <section class="principal">
+            <div class="principal-des">
+                <textarea name="textarea" rows="10" cols="50" class="texo-salida"id="texto-salida"></textarea>
+                <img src="imagenes/Muñeco.png"id="imagen"class="imagenes"><!-- imajen -->
+                <h2 id="h2">Ningún mensaje fue encontrado</h2>
+                <p id="p">Ingresa el texto que desees encriptar o desencriptar.</p>
+                <input type="button" id="copiar" value="Copiar" onclick="copiar()">
+            </div>
+            <div>
+                
+            </div>
+        </section>
+
+      </main>
+
+      <footer>
+            
+            <p>Desarrollador: Sebastian Toco <a href="https://www.facebook.com/profile.php?id=100004604535977">Faceboock</a></p>
+            <img class="log"src="imagenes/foto.jpg" width="200" height="200">
+           
+
+        </footer>
+
+    </body>
+</html>
+<script>
+    
+    //`La letra "e" es convertida para "enter"`
+    //`La letra "i" es convertida para "imes"`
+    //`La letra "a" es convertida para "ai"`
+    //`La letra "o" es convertida para "ober"`
+    //`La letra "u" es convertida para "ufat"`
+    function encriptar(){
+        
+        var datos=document.getElementById("textarea-encri").value;
+        var encriptado="";
+        
+        for(var i=0;i<datos.length;i++){
+            if(datos[i]=="a"){
+                encriptado=encriptado+"ai";
+            }
+            if(datos[i]=="e"){
+                encriptado=encriptado+"enter";
+            }
+            if(datos[i]=="i"){
+                encriptado=encriptado+"imes";
+            }
+            if(datos[i]=="o"){
+                encriptado=encriptado+"ober";
+            }
+            if(datos[i]=="u"){
+                encriptado=encriptado+"ufat";
+            }
+            if(datos[i]!="a" && datos[i]!="e" && datos[i]!="i" && datos[i]!="o" && datos[i]!="u"){
+                encriptado=encriptado+datos[i];
+            }
+        }
+        borrar();
+
+        document.getElementById("texto-salida").value=encriptado;
+    }
+    
+    function desencriptar(){
+        var datos=document.getElementById("textarea-encri").value;
+        var desencriptar="";
+        var cont;
+        for(var i=0;i<datos.length;i++){
+            
+            if(datos[i]=="a"){
+                desencriptar=desencriptar+"a";
+                cont=1;
+            }
+            if(datos[i]=="e"){
+                desencriptar=desencriptar+"e";
+                cont=4;
+            }
+            if(datos[i]=="i"){
+                desencriptar=desencriptar+"i";
+                cont=3;
+            }
+            if(datos[i]=="o"){
+                desencriptar=desencriptar+"o";
+                cont=3;
+            }
+            if(datos[i]=="u"){
+                desencriptar=desencriptar+"u";
+                cont=3;
+            }
+            if(datos[i]!="a" && datos[i]!="e" && datos[i]!="i" && datos[i]!="o" && datos[i]!="u"){
+                desencriptar=desencriptar+datos[i];
+                cont=0;
+            }
+            i=cont+i;
+        }
+        borrar();
+        document.getElementById("texto-salida").value=desencriptar;
+        
+    }
+
+    function copiar(){
+        
+        var content = document.getElementById('texto-salida');
+        content.select();
+        document.execCommand('copy');
+
+        alert("COPIADO!");
+    }
+    
+    function borrar() {
+      document.getElementById("imagen","h2","p").style.display = "none";
+      document.getElementById("h2").style.display = "none";
+      document.getElementById("p").style.display = "none";
+      document.getElementById("texto-salida").style.display = "initial";
+      document.getElementById("copiar").style.display = "initial";
+    }
+    
+</script>
